@@ -18,7 +18,7 @@ export const getFetch = async () => {
 };
 const showData = (products) => {
   const productElem = document.getElementById("products");
-  productElem.innerHTML = ""
+  productElem.innerHTML="";
   products.forEach(product => {
     const { title, description, image, price, id } = product;
     productElem.innerHTML += `<div class="col">
@@ -36,7 +36,7 @@ const showData = (products) => {
         <div
           class="card-footer w-100 fw-bold d-flex justify-content-between gap-3"
         >
-          <span>Price:</span><span>${price} $</span>
+          <span>Price:</span><span class="fiyat">${price} $</span>
         </div>
         <div class="card-footer w-100 d-flex justify-content-center gap-3">
           <button class="btn btn-danger">Sepete Ekle</button>
@@ -104,27 +104,22 @@ electronicsBtn.addEventListener("click", ()=>{
   let category = "Electronics";
   getCategorize(category)
 })
-
-homeBtn.addEventListener("click", ()=>{
-  let category = "Home";
-  getCategorize(category)
-})
-
 sportsBtn.addEventListener("click", ()=>{
   let category = "Sports";
   getCategorize(category)
 })
-
+homeBtn.addEventListener("click", ()=>{
+  let category = "Home";
+  getCategorize(category)
+})
 clothingBtn.addEventListener("click", ()=>{
-  let category = "Clothing";
+  let category = "clothing";
   getCategorize(category)
 })
-
 shopBtn.addEventListener("click", ()=>{
-  let category = "Shop";
+  let category = "shop";
   getCategorize(category)
 })
-
 allBtn.addEventListener("click", ()=>{
   showData(data)
 })
@@ -135,7 +130,7 @@ const getCategorize = (categoryBtn) =>{
 
 
   const productElem = document.getElementById("products");
-
+  console.log(newData);
   productElem.innerHTML="";
   newData.forEach(product => {
     
@@ -143,6 +138,9 @@ const getCategorize = (categoryBtn) =>{
    
 
     if(categoryBtn.toLowerCase() === category.toLowerCase()){
+
+     
+     console.log("kategoriden gelen",category_id);
      
               productElem.innerHTML += `<div class="col">
               <div class="card">
@@ -159,7 +157,7 @@ const getCategorize = (categoryBtn) =>{
                 <div
                   class="card-footer w-100 fw-bold d-flex justify-content-between gap-3"
                 >
-                  <span>Price:</span><span>${price} $</span>
+                  <span>Price:</span><span class="fiyat">${price} $</span>
                 </div>
                 <div class="card-footer w-100 d-flex justify-content-center gap-3">
                   <button class="btn btn-danger">Sepete Ekle</button>
@@ -174,40 +172,57 @@ const getCategorize = (categoryBtn) =>{
                 </div>
               </div>
             </div>`;
+
+
             }
+
     })
 }
 
-const sepeteEkle = document.getElementById("sepete-ekle")
+
+// const sepeteEkle = document.getElementById("sepeteEkle")
 const productElem = document.getElementById("products");
 
-productElem.addEventListener("click", (e) => {
+productElem.addEventListener("click", (e)=>{
   // console.log(e.target);
   let gelenCard = e.target.closest(".card")
   // console.log(gelenCard);
   takeCanvas(gelenCard)
+  arttir()
 })
 
-const takeCanvas = (e) => {
+const takeCanvas = (gelenCard) => {
   const canvasCardEkle = document.querySelector(".canvasCardEkle")
-  const cardTitle =  document.querySelector(".card-title").textContent
+  const cardTitle =  gelenCard.querySelector(".card-title").textContent
+  const imgUrl = gelenCard.querySelector("img").getAttribute("src")
+  const fiyat = gelenCard.querySelector(".fiyat").textContent
+  // const miktar =  gelenCard.querySelector(".miktar").textContent
+  // console.log(miktar);
 
   canvasCardEkle.innerHTML += `
-  <div class="card-body">
-  <h5 class="card-title">${cardTitle}</h5>
-  <div class="d-flex align-items-center gap-2" role="button">
-    <i
-      class="fa-solid fa-minus border rounded-circle bg-danger text-white p-2"
-    ></i
-    ><span class="fw-bold">miktar</span
-    ><i
-      class="fa-solid fa-plus border bg-danger text-white rounded-circle p-2"
-    ></i>
+  <div class="card mb-3" style="max-width: 540px">
+  <div class="row g-0">
+    <div class="col-md-4 my-auto">
+      <img src="${imgUrl}" class="img-fluid rounded-start" alt="..." />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">${cardTitle}</h5>
+        <div class="d-flex align-items-center gap-2" role="button">
+          <i class="fa-solid fa-minus border rounded-circle bg-danger text-white p-2"></i><span
+            class="fw-bold miktar">1</span><i
+            class="fa-solid fa-plus border bg-danger text-white rounded-circle p-2"></i>
+        </div>
+        <p class="card-text">Total : ${fiyat} x </p>
+        <button class="btn btn-danger">Remove</button>
+      </div>
+    </div>
   </div>
-  <p class="card-text">Total : fiyat x miktar</p>
-  <button class="btn btn-danger">Remove</button>
 </div>
   `
-  
 
+}
+
+const arttir = () => {
+  
 }
