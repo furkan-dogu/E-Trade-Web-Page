@@ -10,6 +10,21 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      .line-clamp-1 {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    </style>
   <title>E-Trade Web Page</title>
 </head>
 
@@ -39,10 +54,10 @@
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body canvasCardEkle">
-      <!-- <div class="card mb-3" style="max-width: 540px">
+      <div class="card mb-3" style="max-width: 540px">
         <div class="row g-0">
           <div class="col-md-4 my-auto">
-            <img src="./assets/furkan_logo.png" class="img-fluid rounded-start" alt="..." />
+            <img src="./assets/furkan-logo.png" class="img-fluid rounded-start" alt="..." />
           </div>
           <div class="col-md-8 ">
             <div class="card-body">
@@ -57,7 +72,7 @@
             </div>
           </div>
         </div>
-      </div> -->
+      </div>
     </div>
     <div class="offcanvas-footer">
       <div class="d-flex justify-content-between align-items-center">
@@ -89,12 +104,12 @@
     <!--*                                 buttons                                 -->
     <!--* ----------------------------------------------------------------------- -->
     <section class="d-flex justify-content-center flex-wrap gap-3" id="btns">
-      <button class="btn btn-primary" id="all">All</button>
+      <!-- <button class="btn btn-primary" id="all">All</button>
       <button class="btn btn-secondary" id="electronics">Electronics</button>
       <button class="btn btn-success" id="sports">Sports</button>
       <button class="btn btn-info" id="home">Home</button>
       <button class="btn btn-warning" id="shop">Shop</button>
-      <button class="btn btn-danger" id="clothing">Clothing</button>
+      <button class="btn btn-danger" id="clothing">Clothing</button> -->
     </section>
     <!--? ----------------------------------------------------------------------- -->
     <!--?                              search input                               -->
@@ -108,16 +123,16 @@
     <!--!                             category title                              -->
     <!--! ----------------------------------------------------------------------- -->
     <h4 class="text-center mt-2">
-      Category: <span class="text-danger" id="category">Seçilen Kategori Bilgisi</span>
+      Category: <span class="text-danger" id="category">ALL</span>
     </h4>
     <!--+ ----------------------------------------------------------------------- -->
     <!--+                                products                                 -->
     <!--+ ----------------------------------------------------------------------- -->
     <section class="row row-cols-1 row-cols-md-2 row-cols-xl-3 row-cols-xxl-4 justify-content-center g-4 my-5"
       id="products">
-      <!-- <div class="col">
+      <div class="col">
          <div class="card">
-          <img src="./assets/furkan_logo.png" class="p-2" height="250px" alt="..." />
+          <img src="./assets/furkan-logo.png" class="p-2" height="250px" alt="..." />
           <div class="card-body">
             <h5 class="card-title line-clamp-1">Ürün Adı</h5>
             <p class="card-text line-clamp-3">açıklama</p>
@@ -131,14 +146,15 @@
               See Details
             </button>
           </div>
-        </div> -->
-      <!-- </div>  -->
+        </div>
+      </div> 
     </section>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
-    <script type="module" src="./main.js"></script>
+    <!-- <script type="module" src="./main.js"></script> -->
+    <script src="app.js"></script>
 </body>
 
 </html>

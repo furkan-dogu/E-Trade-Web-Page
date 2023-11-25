@@ -1,5 +1,6 @@
 let data;
-let newData = []
+let newData = [];
+let basket = []; // Yeni eklenen kısım: sepetteki ürünleri tutacak dizi
 export const getFetch = async () => {
   const url = "https://anthonyfs.pythonanywhere.com/api/products/";
   try {
@@ -8,18 +9,18 @@ export const getFetch = async () => {
       throw new Error(`There is sth wrong ${res.status}`);
     }
     data = await res.json();
-    // console.log(data);
+    console.log(data);
     showData(data);
     newData = data;
-    // console.log(newData);
+    console.log(newData);
   } catch (error) {
     console.log(error);
   }
 };
 const showData = (products) => {
   const productElem = document.getElementById("products");
-  productElem.innerHTML="";
-  products.forEach(product => {
+  productElem.innerHTML = "";
+  products.forEach((product) => {
     const { title, description, image, price, id } = product;
     productElem.innerHTML += `<div class="col">
       <div class="card">
@@ -52,7 +53,6 @@ const showData = (products) => {
       </div>
     </div>`;
   });
-
   const modal = document.querySelector("#exampleModal");
   modal.addEventListener("show.bs.modal", (event) => {
     const button = event.relatedTarget;
@@ -65,12 +65,9 @@ const showData = (products) => {
     }
   });
 };
-
-
 const getProductId = (id) => {
-  return data.find(product => product.id === parseInt(id));
+  return data.find((product) => product.id === parseInt(id));
 };
-
 const getModal = (product) => {
   const modalTitle = document.querySelector(".modal-title");
   const modalBody = document.querySelector(".modal-body");
@@ -92,57 +89,43 @@ const getModal = (product) => {
 document.addEventListener("DOMContentLoaded", async () => {
   await getFetch();
 });
-
-const electronicsBtn = document.getElementById("electronics")
-const homeBtn = document.getElementById("home")
-const sportsBtn = document.getElementById("sports")
-const clothingBtn = document.getElementById("clothing")
-const shopBtn = document.getElementById("shop")
-const allBtn = document.getElementById("all")
-
-electronicsBtn.addEventListener("click", ()=>{
+const electronicsBtn = document.getElementById("electronics");
+const homeBtn = document.getElementById("home");
+const sportsBtn = document.getElementById("sports");
+const clothingBtn = document.getElementById("clothing");
+const shopBtn = document.getElementById("shop");
+const allBtn = document.getElementById("all");
+electronicsBtn.addEventListener("click", () => {
   let category = "Electronics";
-  getCategorize(category)
-})
-sportsBtn.addEventListener("click", ()=>{
+  getCategorize(category);
+});
+sportsBtn.addEventListener("click", () => {
   let category = "Sports";
-  getCategorize(category)
-})
-homeBtn.addEventListener("click", ()=>{
+  getCategorize(category);
+});
+homeBtn.addEventListener("click", () => {
   let category = "Home";
-  getCategorize(category)
-})
-clothingBtn.addEventListener("click", ()=>{
+  getCategorize(category);
+});
+clothingBtn.addEventListener("click", () => {
   let category = "clothing";
-  getCategorize(category)
-})
-shopBtn.addEventListener("click", ()=>{
-  let category = "shop";
-  getCategorize(category)
-})
-allBtn.addEventListener("click", ()=>{
-  showData(data)
-})
-
-
-const getCategorize = (categoryBtn) =>{
-
-
-
+  getCategorize(category);
+});
+shopBtn.addEventListener("click", () => {
+  getCategorize("shop");
+});
+allBtn.addEventListener("click", () => {
+  showData(data);
+});
+const getCategorize = (categoryBtn) => {
   const productElem = document.getElementById("products");
   console.log(newData);
-  productElem.innerHTML="";
-  newData.forEach(product => {
-    
+  productElem.innerHTML = "";
+  newData.forEach((product) => {
     let { title, description, image, price, category_id, id, category } = product;
-   
-
-    if(categoryBtn.toLowerCase() === category.toLowerCase()){
-
-     
-     console.log("kategoriden gelen",category_id);
-     
-              productElem.innerHTML += `<div class="col">
+    if (categoryBtn.toLowerCase() === category.toLowerCase()) {
+      console.log("kategoriden gelen", category_id);
+      productElem.innerHTML += `<div class="col">
               <div class="card">
                 <img
                   src="${image}"
@@ -172,57 +155,66 @@ const getCategorize = (categoryBtn) =>{
                 </div>
               </div>
             </div>`;
-
-
-            }
-
-    })
-}
-
-
-// const sepeteEkle = document.getElementById("sepeteEkle")
+    }
+  });
+};
+const sepeteEkle = document.getElementById("sepeteEkle");
 const productElem = document.getElementById("products");
-
-productElem.addEventListener("click", (e)=>{
-  // console.log(e.target);
-  let gelenCard = e.target.closest(".card")
-  // console.log(gelenCard);
-  takeCanvas(gelenCard)
-  arttir()
-})
-
+productElem.addEventListener("click", (e) => {
+  if (e.target.classList.contains("btn-danger")) {
+    let gelenCard = e.target.closest(".card");
+    console.log(gelenCard);
+    takeCanvas(gelenCard);
+  }
+  console.log(e.target);
+});
+//! Badge'yi ulaştığımız fonksiyon
+const upBadge = () => {
+  const badge = document.querySelector("#sepet");
+  badge.textContent = newBadge;
+};
+let newBadge = 0;
 const takeCanvas = (gelenCard) => {
-  const canvasCardEkle = document.querySelector(".canvasCardEkle")
-  const cardTitle =  gelenCard.querySelector(".card-title").textContent
-  const imgUrl = gelenCard.querySelector("img").getAttribute("src")
-  const fiyat = gelenCard.querySelector(".fiyat").textContent
-  // const miktar =  gelenCard.querySelector(".miktar").textContent
-  // console.log(miktar);
-
-  canvasCardEkle.innerHTML += `
-  <div class="card mb-3" style="max-width: 540px">
-  <div class="row g-0">
-    <div class="col-md-4 my-auto">
-      <img src="${imgUrl}" class="img-fluid rounded-start" alt="..." />
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">${cardTitle}</h5>
-        <div class="d-flex align-items-center gap-2" role="button">
-          <i class="fa-solid fa-minus border rounded-circle bg-danger text-white p-2"></i><span
-            class="fw-bold miktar">1</span><i
-            class="fa-solid fa-plus border bg-danger text-white rounded-circle p-2"></i>
+  const canvasCardEkle = document.querySelector(".canvasCardEkle");
+  const cardTitle = gelenCard.querySelector(".card-title").textContent;
+  const imgUrl = gelenCard.querySelector("img").getAttribute("src");
+  const fiyat = gelenCard.querySelector(".fiyat").textContent;
+  newBadge++;
+  const bproduct = basket.find((item) => item.title === cardTitle);
+  if (bproduct) {
+    bproduct.quantity++;
+  } else {
+    const newProdct = {
+      title: cardTitle,
+      url: imgUrl,
+      price: fiyat,
+      quantity: 1
+    };
+    basket.push(newProdct);
+  }
+  canvasCardEkle.innerHTML = "";
+  basket.forEach((product) => {
+    canvasCardEkle.innerHTML += `
+      <div class="card mb-3" style="max-width: 540px">
+        <div class="row g-0">
+          <div class="col-md-4 my-auto">
+            <img src="${product.url}" class="img-fluid rounded-start" alt="..." />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">${product.title}</h5>
+              <div class="d-flex align-items-center gap-2" role="button">
+                <i class="fa-solid fa-minus border rounded-circle bg-danger text-white p-2"></i>
+                <span class="fw-bold miktar">${product.quantity}</span>
+                <i class="fa-solid fa-plus border bg-danger text-white rounded-circle p-2"></i>
+              </div>
+              <p class="card-text">Total : ${product.price} x ${product.quantity}</p>
+              <button class="btn btn-danger">Remove</button>
+            </div>
+          </div>
         </div>
-        <p class="card-text">Total : ${fiyat} x </p>
-        <button class="btn btn-danger">Remove</button>
       </div>
-    </div>
-  </div>
-</div>
-  `
-
-}
-
-const arttir = () => {
-  
-}
+    `;
+  });
+  upBadge();
+};
