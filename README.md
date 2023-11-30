@@ -24,8 +24,9 @@ You can access the live version of the project [here](https://e-trade-web-page.v
 - Remove items and adjust quantities in the shopping cart.
 - See the total amount in the shopping cart.
 
-## Mobile support
-The WebApp is compatible with devices of all sizes and all OS's, and consistent improvements are being made.
+## Screenshot
+
+The project is compatible with both wide-screen computers and mobile devices.
 
 <div align="center">
   <img src="https://github.com/furkan-dogu/E-Trade-Web-Page/blob/main/assets/Screenshot_1.jpg"  width="30%" height="400" />
