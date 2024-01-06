@@ -6,6 +6,13 @@
 
 Welcome to the Shopping App! This web application allows users to explore products, add them to the shopping cart, and view details about each product. It is built using HTML and JavaScript, with additional dependencies such as Bootstrap and Font Awesome.
 
+## Table of Contents
+
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Technologies Used](#technologies-used)
+- [How to Use](#how-to-use)
+
 ## Live Project Link
 
 You can access the live version of the project [here](https://e-trade-web-page.vercel.app/).
