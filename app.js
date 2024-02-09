@@ -175,17 +175,27 @@ function addToCart(product) {
   // console.log(product);
 
   // Ürünün sepet içinde olup olmadığını kontrol et
-  const existingBasketItem = baskets.find((item) => item.id === product.id);
+  // const existingBasketItem = baskets.find((item) => item.id === product.id);
 
-  if (existingBasketItem) {
-    // Eğer sepet içinde varsa, miktarı artır
-    existingBasketItem.quantity += 1;
+  // if (existingBasketItem) {
+  //   // Eğer sepet içinde varsa, miktarı artır
+  //   existingBasketItem.quantity += 1;
+  // } else {
+  //   // Eğer sepet içinde yoksa, yeni bir sepet öğesi oluştur
+  //   const newBasketItem = { ...product, quantity: 1 };
+  //   countBasket++;
+  //   sepetPosition.innerText = countBasket;
+  //   baskets.push(newBasketItem);
+  // }
+
+  if(baskets.some(item => item.title === product.title)) {
+    baskets = baskets.map(item => {
+      return item.id === product.id ? {...item, quantity:item.quantity + 1} : item
+    })
   } else {
-    // Eğer sepet içinde yoksa, yeni bir sepet öğesi oluştur
-    const newBasketItem = { ...product, quantity: 1 };
     countBasket++;
     sepetPosition.innerText = countBasket;
-    baskets.push(newBasketItem);
+    baskets.push(product)
   }
 
   // console.log(baskets);
